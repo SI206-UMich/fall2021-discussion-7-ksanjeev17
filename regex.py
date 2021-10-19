@@ -2,6 +2,10 @@ import re
 import os
 import unittest
 
+# Name: Kushal Sanjeev
+# UMICH ID: 46299632
+# Collaborators: Sage
+
 def read_file(filename):
     """ Return a list of the lines in the file with the passed filename """
     
@@ -23,55 +27,54 @@ def find_word(string_list):
     """ Return a list of words that contain three digit numbers in the middle. """
 
     # initialize an empty list
-
+    wlist = []
     # define the regular expression
-
+    expression = r'\b([a-zA-z]+)\d{3}([a-zA-Z]+)'
     # loop through each line of the string list 
-
+    for line in string_list:
     # find all the words that match the regular expression in each line
-    
-    # loop through the found words and add the words to your empty list 
+        match = re.findall(expression,line)
+        for word in match:
+            str = " "
+        wlist.append(str)
 
     #return the list of all words that start with the letter B, E, or T
-    pass
+    return wlist
 
 
 def find_days(string_list):
     """ Return a list of days from the list of strings the dates format in the text are MM/DD/YYYY. """  
 
     # initialize an empty list
-
+    dlist = []
     # define the regular expression
-
+    expression = r'\b\d(1,2)[\/](d(1,2))[\/](\d{4})'
+    expression = r'^(0?[1-9]|1[0-2])\/(0?[1-9]|1\d|2\d3[01])\/(19|20)\d{2}$'
     # loop through each line of the string list
-    
-    # find all the dates that match the regular expression in each line
-    
-    # loop through the found dates and only add the days to your empty list 
-    
+    for x in string_list: 
+        match = re.findall(expression,x)
+        for date in match:
+            dlist.append(date[1])
     #return the list of days
-    pass
+    return dlist
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
 
     # initialize an empty list
-
+    domlist = []
     # define the regular expression
-
+    expression = r'https?://[\w.]+'
     # loop through each line of the string list
-
+    for line in string_list:
+        match = re.findall(expression,line)
     # find all the domains that match the regular expression in each line
-
-    # loop through the found domains
-
-    # get the domain name by splitting the (//) after the https or http to get the website name
-    # then strip the www. to get only the domain name
-
-    # add the domains to your empty list
+        for i in match:
+            domain = i.split('//')[1].strip('www.')
+            domlist.append(domain)
     
     #return the list of domains
-    pass
+    return domlist
 
 class TestAllMethods(unittest.TestCase):
 
